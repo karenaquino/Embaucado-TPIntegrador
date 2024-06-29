@@ -77,7 +77,7 @@ int main()
 
     int totalPuntoRondaJugador1=0;
     int totalPuntoRondaJugador2=0;
-
+    //este es un comentario desde github
     int acuJ1 = 0;
     int acuJ2 = 0;
     srand(time(0));//semilla para numero random
