@@ -18,8 +18,8 @@ void mostrarMenuPrincipal() {
     cout << "\t\t=|             EMBAUCADO              |=" << endl;
     cout << "\t\t=|        ---------------------       |=" << endl;
     cout << "\t\t=|             1 - JUGAR              |=" << endl;
-    cout << "\t\t=|             2 - ESTADÍSTICAS       |=" << endl;
-    cout << "\t\t=|             3 - CRÉDITOS           |=" << endl;
+    cout << "\t\t=|             2 - ESTADÃSTICAS       |=" << endl;
+    cout << "\t\t=|             3 - CRÃ‰DITOS           |=" << endl;
     cout << "\t\t=|        ---------------------       |=" << endl;
     cout << "\t\t=|             0 - SALIR              |=" << endl;
     cout << "\t\t=|                                    |=" << endl;
@@ -129,7 +129,7 @@ void repartirCartasJugador(string mazoNaipe[],
         if (num1 != num2 && (mazoNaipe[num1] != "Cero")) {
             //pregunto si son distintos num1 y num2 Y si lo que hay guardado en mazoNaipe[num1] es distinto de "Cero".
             // si es verdadero almacena el palo y el naipe en su respectivo vector, si es falso no hace nada y genera numero nuevo.
-            // num2 lo inicialize en 1 
+            // num2 lo inicialize en 1
             num2 = num1;
             //  cout<<num2<<"----2--"<<endl;
 
@@ -217,7 +217,7 @@ void cartasjugadores(string vJugador1[], string vJugador2[], int cantCartas, str
     }
 }
 void mostrarNombresJugadores(string nombreJugador1, string nombreJugador2) {
-   
+
     cout << "---------------------------------------------------------------" << endl;
     cout << "Jugador 1:" << nombreJugador1 << " \t\t  " << "Jugador 2:" << nombreJugador2 << endl;
     cout << "---------------------------------------------------------------" << endl;
@@ -259,15 +259,30 @@ void puntosPorJugador(string naipeJugador[], string paloJugador[], int puntosJug
         else if (naipeJugador[x] == "A") {
             puntosJugador[x] = 20;
         }
-       
+
 
     }
-    
+
 
 }
 
 void confirmarEmbaucadora() {
 
+}
+
+
+//Opcion 3 creditos
+void creditos()
+{
+
+    cout << "Grupo: 25" << endl << endl;
+    cout << "Integrantes:" << endl;
+    cout << "Legajo     Apellido y Nombre:" << endl;
+    cout << "29680      Aquino, Karen " << endl;
+    cout << "30901      Benitez, Jorge Ezequiel" << endl;
+    cout << "29822      Martin, Matias" << endl;
+    cout << "30489      Morales, Juan Pablo" << endl;
+}
 }
 void mostrarCambioEmbaucadora(string cartaEmbaucadora, int& totalPuntoRondaJugador) {
    /* SetConsoleTextAttribute(hConsole, 4);*/

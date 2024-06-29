@@ -4,6 +4,7 @@
 #include<cstdlib>
 #include<ctime>
 #include <windows.h>
+#include <locale.h>
 using namespace std;
 
 /*
@@ -51,16 +52,17 @@ HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 //El símbolo & de ampersand se utiliza en C++ como declarador de referencia además de ser el operador de dirección.
 int main()
 {
-   const int TAM = 20;
+    const int TAM = 20;
     int numero;
     int ronda = 0;
+    setlocale(LC_ALL, "SPANISH");
 
-   const int cantCartas = 5;
+    const int cantCartas = 5;
     string cartaEmbaucadora;
 
     string mazoNaipe[TAM] = {};
     string mazoPalo[TAM] = {};
-    
+
     string naipesJugador1[cantCartas] = {};
     string naipesJugador2[cantCartas] = {};
 
@@ -72,8 +74,8 @@ int main()
 
     char confirmaEmbaucadora;
 
-   /* string vJugador1[cantCartas] = {};
-    string vJugador2[cantCartas] = {};*/
+    /* string vJugador1[cantCartas] = {};
+     string vJugador2[cantCartas] = {};*/
 
     int totalPuntoRondaJugador1=0;
     int totalPuntoRondaJugador2=0;
@@ -81,7 +83,7 @@ int main()
     int acuJ1 = 0;
     int acuJ2 = 0;
     srand(time(0));//semilla para numero random
-    
+
     string nombreJugador1, nombreJugador2;
 
     mostrarMenuPrincipal();
@@ -91,19 +93,20 @@ int main()
     cout << endl;
     system("cls");
 
-    if (numero == 1 && ronda == 0) {
-        
+    if (numero == 1 && ronda == 0)
+    {
+
         ronda++;
-        
+
         /// carga de jugadores
         cout << endl;
 
         cargarJugadores(nombreJugador1, nombreJugador2);
-        
+
         cout << endl;
         cout << endl;
-        
-        for (size_t i = 0; i <=3 ; i++)
+
+        for (size_t i = 0; i <=2 ; i++)
         {
             //crear mazos
             crearMazos(mazoNaipe, mazoPalo);
@@ -125,7 +128,7 @@ int main()
             puntosPorJugador(naipesJugador2, palosJugador2, puntosJugador2, cantCartas, cartaEmbaucadora);
 
             mostrarCartasjugadores(naipesJugador1, palosJugador1, puntosJugador1,
-                naipesJugador2, palosJugador2, puntosJugador2);
+                                   naipesJugador2, palosJugador2, puntosJugador2);
             //cartasjugadores(vJugador1, vJugador2, cantCartas, nombreJugador1, nombreJugador2);
 
 
@@ -140,18 +143,20 @@ int main()
 
            
             acuJ1 = 0;
-            for (int i = 0;i < 5;i++) {
+            for (int i = 0; i < 5; i++)
+            {
                 acuJ1 += puntosJugador1[i];
                 totalPuntoRondaJugador1 += acuJ1;
             }
-            
+
             cout << "JUGADOR " << nombreJugador1 << endl;
             cout << "Puntos: " << acuJ1 << endl;
             cout << "---------------- " << endl;
 
             cout << "JUGADOR " << nombreJugador2 << endl;
             acuJ2 = 0;
-            for (int i = 0;i < 5;i++) {
+            for (int i = 0; i < 5; i++)
+            {
                 acuJ2 += puntosJugador2[i];
                 totalPuntoRondaJugador2 += acuJ2;
             }
@@ -270,10 +275,26 @@ int main()
            
             ronda++;
         }
-    }    
+
+
+
+
+    }
+
+ //falta agregar la estadistica
+
+
+
+ //Menu de creditos
+    if (numero == 3)
+    {
+
+        creditos();
+        system("pause");
+        system("cls");
+    }
+
 }
-
-
 
 
 
