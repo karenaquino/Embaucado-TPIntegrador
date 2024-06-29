@@ -266,9 +266,7 @@ void puntosPorJugador(string naipeJugador[], string paloJugador[], int puntosJug
 
 }
 
-void confirmarEmbaucadora() {
 
-}
 
 
 //Opcion 3 creditos
@@ -283,7 +281,7 @@ void creditos()
     cout << "29822      Martin, Matias" << endl;
     cout << "30489      Morales, Juan Pablo" << endl;
 }
-}
+
 void mostrarCambioEmbaucadora(string cartaEmbaucadora, int& totalPuntoRondaJugador) {
    /* SetConsoleTextAttribute(hConsole, 4);*/
     generarEmbaucadora(cartaEmbaucadora);

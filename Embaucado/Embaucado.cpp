@@ -164,32 +164,49 @@ int main()
 
             SetConsoleTextAttribute(hConsole, 15);
 
+            //RONDA 2
+            //PREGUNTAMOS SI EL JUGADOR 1 TIENE UN PUNTAJE DE 20 O MAS
             if (i == 1 && totalPuntoRondaJugador1 >= 20)
-            {
+            {   
+                //RONDA 2, 
+                // SE LE PREGUNTA PRIMERO AL JUGADOR 1 SI QUIERE CAMBIAR LA EMBAUCADORA
                 cout << nombreJugador1 << ", ¿Deseas modificar la carta embaucadora actual " << "(" << cartaEmbaucadora << ")? (S/N): ";
                 cin >> confirmaEmbaucadora;
+                
+                //PUEDE RESPONDER SI
                 if (confirmaEmbaucadora == 's' || confirmaEmbaucadora == 'S')
                 {
                     SetConsoleTextAttribute(hConsole, 4);
                     mostrarCambioEmbaucadora(cartaEmbaucadora, totalPuntoRondaJugador1);
                     SetConsoleTextAttribute(hConsole, 15);
                 }
+               
+                //PUEDE RESPONDER NO
                 else if (confirmaEmbaucadora == 'n' || confirmaEmbaucadora == 'N')
-                {
+                {   
+                    //SI EL JUGADOR 1, RESPONDE QUE NO, SE PROCEDE A PREGUNTARLE AL JUGADOR 2
+                    //PARA ESO DEBE CUMPLIR CON LA CONDICIÓN PUNTAJE>=20
                     if (totalPuntoRondaJugador2 >= 20)
                     {
                         cout << nombreJugador2 << ", ¿Deseas modificar la carta embaucadora actual " << "(" << cartaEmbaucadora << ")? (S/N): ";
                         cin >> confirmaEmbaucadora;
+                        
+                        //JUGADOR 2, PUEDE RESPONDER QUE SI
                         if (confirmaEmbaucadora == 's' || confirmaEmbaucadora == 'S')
                         {
                             mostrarCambioEmbaucadora(cartaEmbaucadora, totalPuntoRondaJugador2);
                         }
+                        
+                        //JUGADOR 2, PUEDE RESPONDER QUE NO
                         else if (confirmaEmbaucadora == 'n' || confirmaEmbaucadora == 'N')
                         {
                             cout << "No se modificó la carta Embaucadora, a continuación se calcularán los puntos de la ronda..." << endl;
+                            //CALCULAR PUNTAJES DE LA RONDA...
                         }
 
                     }
+
+                    
                 }
 
             }
