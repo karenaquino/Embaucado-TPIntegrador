@@ -3,6 +3,12 @@
 #include "funciones.h"
 #include<cstdlib>
 #include<ctime>
+
+
+
+
+
+
 using namespace std;
 
 void mostrarMenuPrincipal() {
@@ -262,4 +268,13 @@ void puntosPorJugador(string naipeJugador[], string paloJugador[], int puntosJug
 
 void confirmarEmbaucadora() {
 
+}
+void mostrarCambioEmbaucadora(string cartaEmbaucadora, int& totalPuntoRondaJugador) {
+   /* SetConsoleTextAttribute(hConsole, 4);*/
+    generarEmbaucadora(cartaEmbaucadora);
+    cout << "---------------------------------------------------------------   " << endl;
+    cout << "Nueva Carta Embaucadora: " << cartaEmbaucadora << endl;
+    cout << "---------------------------------------------------------------   " << endl;
+   /* SetConsoleTextAttribute(hConsole, 15);*/
+    totalPuntoRondaJugador -= 20;
 }

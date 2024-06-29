@@ -103,7 +103,7 @@ int main()
         cout << endl;
         cout << endl;
         
-        for (size_t i = 0; i <=2 ; i++)
+        for (size_t i = 0; i <=3 ; i++)
         {
             //crear mazos
             crearMazos(mazoNaipe, mazoPalo);
@@ -136,19 +136,13 @@ int main()
             cout << endl;
             cout << "---------------------------------------------------------------" << endl;
             //---------------------------------------------------------------------------//
-            // //genera cartaEmbaucadora
+           
 
-            //muestra carta Embaucadora
-
-            SetConsoleTextAttribute(hConsole, 4);
-            cout << "---------------------------------------------------------------   " << endl;
-            cout << "Carta Embaucadora: " << cartaEmbaucadora << endl;
-            cout << "---------------------------------------------------------------   " << endl;
-            
+           
             acuJ1 = 0;
             for (int i = 0;i < 5;i++) {
                 acuJ1 += puntosJugador1[i];
-                totalPuntoRondaJugador1 = acuJ1;
+                totalPuntoRondaJugador1 += acuJ1;
             }
             
             cout << "JUGADOR " << nombreJugador1 << endl;
@@ -159,7 +153,7 @@ int main()
             acuJ2 = 0;
             for (int i = 0;i < 5;i++) {
                 acuJ2 += puntosJugador2[i];
-                totalPuntoRondaJugador2 = acuJ2;
+                totalPuntoRondaJugador2 += acuJ2;
             }
             cout <<" Puntos: " << acuJ2 << endl;
 
@@ -172,12 +166,8 @@ int main()
                 if (confirmaEmbaucadora == 's' || confirmaEmbaucadora == 'S')
                 {
                     SetConsoleTextAttribute(hConsole, 4);
-                    generarEmbaucadora(cartaEmbaucadora);
-                    cout << "---------------------------------------------------------------   " << endl;
-                    cout << "Nueva Carta Embaucadora: " << cartaEmbaucadora << endl;
-                    cout << "---------------------------------------------------------------   " << endl;
+                    mostrarCambioEmbaucadora(cartaEmbaucadora, totalPuntoRondaJugador1);
                     SetConsoleTextAttribute(hConsole, 15);
-                    totalPuntoRondaJugador1 -= 20;
                 }
                 else if (confirmaEmbaucadora == 'n' || confirmaEmbaucadora == 'N')
                 {
@@ -187,13 +177,7 @@ int main()
                         cin >> confirmaEmbaucadora;
                         if (confirmaEmbaucadora == 's' || confirmaEmbaucadora == 'S')
                         {
-                            SetConsoleTextAttribute(hConsole, 4);
-                            generarEmbaucadora(cartaEmbaucadora);
-                            cout << "---------------------------------------------------------------   " << endl;
-                            cout << "Nueva Carta Embaucadora: " << cartaEmbaucadora << endl;
-                            cout << "---------------------------------------------------------------   " << endl;
-                            SetConsoleTextAttribute(hConsole, 15);
-                            totalPuntoRondaJugador2 -= 20;
+                            mostrarCambioEmbaucadora(cartaEmbaucadora, totalPuntoRondaJugador2);
                         }
                         else if (confirmaEmbaucadora == 'n' || confirmaEmbaucadora == 'N')
                         {
@@ -212,13 +196,7 @@ int main()
                 cin >> confirmaEmbaucadora;
                 if (confirmaEmbaucadora == 's' || confirmaEmbaucadora == 'S')
                 {
-                    SetConsoleTextAttribute(hConsole, 4);
-                    generarEmbaucadora(cartaEmbaucadora);
-                    cout << "---------------------------------------------------------------   " << endl;
-                    cout << "Nueva Carta Embaucadora: " << cartaEmbaucadora << endl;
-                    cout << "---------------------------------------------------------------   " << endl;
-                    SetConsoleTextAttribute(hConsole, 15);
-                    totalPuntoRondaJugador2 -= 20;
+                    mostrarCambioEmbaucadora(cartaEmbaucadora, totalPuntoRondaJugador2);
                 }
                 else if (confirmaEmbaucadora == 'n' || confirmaEmbaucadora == 'N')
                 {
@@ -238,13 +216,7 @@ int main()
                 cin >> confirmaEmbaucadora;
                 if (confirmaEmbaucadora == 's' || confirmaEmbaucadora == 'S')
                 {
-                    SetConsoleTextAttribute(hConsole, 4);
-                    generarEmbaucadora(cartaEmbaucadora);
-                    cout << "---------------------------------------------------------------   " << endl;
-                    cout << "Nueva Carta Embaucadora: " << cartaEmbaucadora << endl;
-                    cout << "---------------------------------------------------------------   " << endl;
-                    SetConsoleTextAttribute(hConsole, 15);
-                    totalPuntoRondaJugador2 -= 20;
+                    mostrarCambioEmbaucadora(cartaEmbaucadora, totalPuntoRondaJugador2);
                 }
                 else if (confirmaEmbaucadora == 'n' || confirmaEmbaucadora == 'N')
                 {
@@ -254,13 +226,7 @@ int main()
                         cin >> confirmaEmbaucadora;
                         if (confirmaEmbaucadora == 's' || confirmaEmbaucadora == 'S')
                         {
-                            SetConsoleTextAttribute(hConsole, 4);
-                            generarEmbaucadora(cartaEmbaucadora);
-                            cout << "---------------------------------------------------------------   " << endl;
-                            cout << "Nueva Carta Embaucadora: " << cartaEmbaucadora << endl;
-                            cout << "---------------------------------------------------------------   " << endl;
-                            SetConsoleTextAttribute(hConsole, 15);
-                            totalPuntoRondaJugador1 -= 20;
+                            mostrarCambioEmbaucadora(cartaEmbaucadora, totalPuntoRondaJugador1);
                         }
                         else if (confirmaEmbaucadora == 'n' || confirmaEmbaucadora == 'N')
                         {
@@ -284,13 +250,7 @@ int main()
                 cin >> confirmaEmbaucadora;
                 if (confirmaEmbaucadora == 's' || confirmaEmbaucadora == 'S')
                 {
-                    SetConsoleTextAttribute(hConsole, 4);
-                    generarEmbaucadora(cartaEmbaucadora);
-                    cout << "---------------------------------------------------------------   " << endl;
-                    cout << "Nueva Carta Embaucadora: " << cartaEmbaucadora << endl;
-                    cout << "---------------------------------------------------------------   " << endl;
-                    SetConsoleTextAttribute(hConsole, 15);
-                    totalPuntoRondaJugador1 -= 20;
+                    mostrarCambioEmbaucadora(cartaEmbaucadora, totalPuntoRondaJugador1);
                 }
                 else if (confirmaEmbaucadora == 'n' || confirmaEmbaucadora == 'N')
                 {
@@ -307,15 +267,10 @@ int main()
             system("cls");
 
 
-            //--------------------------------------------------------------------------//
+           
             ronda++;
         }
-        
-       
-        
-
-    }
-    
+    }    
 }
 
 

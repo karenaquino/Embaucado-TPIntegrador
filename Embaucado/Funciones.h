@@ -26,6 +26,7 @@ void cartasjugadores(string vJugador1[], string vJugador2[], int cantCartas, str
 
 //carta embaucadora
 void generarEmbaucadora(string& cartaEmbaucadora);
+void mostrarCambioEmbaucadora(string cartaEmbaucadora, int& totalPuntoRondaJugador);
 
 //funciones para crear mazos
 void crearMazoNaipe(string mazoNaipe[]);
