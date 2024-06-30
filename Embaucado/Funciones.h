@@ -43,5 +43,9 @@ void mostrarCartasjugadores(string naipesJugador1[], string palosJugador1[], int
 
 void puntosPorJugador(string naipeJugador[], string paloJugador[], int puntosJugador[], int cantCartas, string& cartaEmbaucadora);
 
+void mostrarGanador(int &acuJ1, int &acuJ2, string &nombreJugador1, string &nombreJugador2, int totalPuntoRondaJugador1[], int totalPuntoRondaJugador2[]);
+
+void resumenPartida(string &nombreJugador1, string &nombreJugador2, int totalPuntoRondaJugador1[], int totalPuntoRondaJugador2[]);
+
 //Funcion para creditos
 void creditos();
