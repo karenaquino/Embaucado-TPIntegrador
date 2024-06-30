@@ -214,10 +214,10 @@ void cartasjugadores(string vJugador1[], string vJugador2[], int cantCartas, str
         cout << "\t" << vJugador1[z] << " \t\t\t " << vJugador2[z] << endl;
     }
 }
-void mostrarNombresJugadores(string nombreJugador1, string nombreJugador2) {
+void mostrarNombresJugadores(string nombreJugador1, string nombreJugador2, int &acuJ1, int &acuJ2) {
 
     cout << "---------------------------------------------------------------" << endl;
-    cout << "Jugador 1:" << nombreJugador1 << " \t\t  " << "Jugador 2:" << nombreJugador2 << endl;
+    cout << "Jugador 1:" << nombreJugador1 << " (" << acuJ1 << " puntos) \t\t  " << "Jugador 2:" << nombreJugador2 << " (" << acuJ2 << " puntos)" << endl;
     cout << "---------------------------------------------------------------" << endl;
     cout << endl;
 
