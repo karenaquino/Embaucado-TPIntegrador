@@ -3,11 +3,9 @@
 #include "funciones.h"
 #include<cstdlib>
 #include<ctime>
+#include <windows.h>
 
-
-
-
-
+HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
 using namespace std;
 
@@ -34,14 +32,14 @@ void cargarJugadores(string& nombre1, string& nombre2) {
     cout << "\t\t ----------------------------------------------   " << endl;
     cout << "\t\t  Antes de comenzar deben registrar sus nombres:  " << endl;
     cout << "\t\t                                                  " << endl;
-    cout << "\t\t  Nombre del Jugador 1:";cin >> nombre1;
-    cout << "\t\t  Nombre del Jugador 2:";cin >> nombre2;  cout << endl;
+    cout << "\t\t  Nombre del Jugador 1: ";cin >> nombre1;
+    cout << "\t\t  Nombre del Jugador 2: ";cin >> nombre2;  cout << endl;
 
 
 
 
     do {
-        cout << "\t\t  Confirmar nombres (S/N):";
+        cout << "\t\t  Confirmar nombres (S/N): ";
         cin >> opcion; cout << endl;
 
 
@@ -282,12 +280,87 @@ void creditos()
     cout << "30489      Morales, Juan Pablo" << endl;
 }
 
-void mostrarCambioEmbaucadora(string cartaEmbaucadora, int& totalPuntoRondaJugador) {
-   /* SetConsoleTextAttribute(hConsole, 4);*/
+void mostrarCambioEmbaucadora(string cartaEmbaucadora, int &acuJ) {
+   SetConsoleTextAttribute(hConsole, 4);
     generarEmbaucadora(cartaEmbaucadora);
     cout << "---------------------------------------------------------------   " << endl;
     cout << "Nueva Carta Embaucadora: " << cartaEmbaucadora << endl;
     cout << "---------------------------------------------------------------   " << endl;
-   /* SetConsoleTextAttribute(hConsole, 15);*/
-    totalPuntoRondaJugador -= 20;
+   SetConsoleTextAttribute(hConsole, 15);
+    acuJ -= 20;
+}
+
+void resumenPartida(string &nombreJugador1, string &nombreJugador2, int totalPuntoRondaJugador1[], int totalPuntoRondaJugador2[])
+{
+ SetConsoleTextAttribute(hConsole, 9);
+ cout << "\t\t RESUMEN DE PARTIDA: " << endl;
+ cout << "+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::" << endl;
+ cout << endl;
+ cout << " \t\t" << nombreJugador1 << " VS " << nombreJugador2 << endl;
+ cout << "RONDA 1: \t " << totalPuntoRondaJugador1 [0] << " \t " << totalPuntoRondaJugador2 [0] << endl;
+ cout << "RONDA 2: \t " << totalPuntoRondaJugador1 [1] << " \t " << totalPuntoRondaJugador2 [1] << endl;
+ cout << "RONDA 3: \t " << totalPuntoRondaJugador1 [2] << " \t " << totalPuntoRondaJugador2 [2] << endl;
+ cout << endl;
+ cout << "+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::" << endl;
+}
+
+void mostrarGanador(int &acuJ1, int &acuJ2, string &nombreJugador1, string &nombreJugador2, int totalPuntoRondaJugador1[], int totalPuntoRondaJugador2[])
+{
+    int rondaMaximaJ1;
+    int rondaMaximaJ2;
+
+    if (acuJ1 > acuJ2)
+    {
+        cout << "+----------------------------------------------------------------------+" << endl;
+        cout << "\t\t¡GANADOR: " << nombreJugador1 << " CON " << acuJ1 << " PUNTOS!" << endl;
+        cout << "+----------------------------------------------------------------------+" << endl;
+    }
+    else if (acuJ2 > acuJ1)
+    {
+        cout << "+----------------------------------------------------------------------+" << endl;
+        cout << "\t\t¡GANADOR: " << nombreJugador2 << " CON " << acuJ2 << " PUNTOS!" << endl;
+        cout << "+----------------------------------------------------------------------+" << endl;
+    }
+
+    else if (acuJ1 == acuJ2)
+    {
+        for (int i=0; i<3; i++)
+        {
+            if (i==0)
+            {
+                rondaMaximaJ1 = totalPuntoRondaJugador1[i];
+                rondaMaximaJ2 = totalPuntoRondaJugador2[i];
+            }
+            if (rondaMaximaJ1 > totalPuntoRondaJugador1[i])
+            {
+                rondaMaximaJ1 = totalPuntoRondaJugador1[i];
+            }
+            if (rondaMaximaJ2 > totalPuntoRondaJugador2[i])
+            {
+                rondaMaximaJ2 = totalPuntoRondaJugador2[i];
+            }
+        }
+
+        if (rondaMaximaJ1 > rondaMaximaJ2)
+        {
+            cout << "+----------------------------------------------------------------------+" << endl;
+            cout << "\t\t¡GANADOR: " << nombreJugador1 << " OBTUVISTE EL MAYOR PUNTAJE EN UNA RONDA!" << endl;
+            cout << "+----------------------------------------------------------------------+" << endl;
+        }
+        else if (rondaMaximaJ2 > rondaMaximaJ1)
+        {
+            cout << "+----------------------------------------------------------------------+" << endl;
+            cout << "\t\t¡GANADOR: " << nombreJugador2 << " OBTUVISTE EL MAYOR PUNTAJE EN UNA RONDA!" << endl;
+            cout << "+----------------------------------------------------------------------+" << endl;
+        }
+        else
+        {
+            cout << "+----------------------------------------------------------------------+" << endl;
+            cout << "\t\t¡EMPATE: " << nombreJugador1 << " Y " << nombreJugador2 << endl;
+            cout << "\t\tOBTUVIERON EL MISMO PUNTAJE TOTAL Y MISMO PUNTAJE MÁXIMO EN RONDAS." << endl;
+            cout << "+----------------------------------------------------------------------+" << endl;
+        }
+
+    }
+    SetConsoleTextAttribute(hConsole, 15);
 }
