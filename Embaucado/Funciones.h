@@ -26,7 +26,7 @@ void cartasjugadores(string vJugador1[], string vJugador2[], int cantCartas, str
 
 //carta embaucadora
 void generarEmbaucadora(string& cartaEmbaucadora);
-void mostrarCambioEmbaucadora(string cartaEmbaucadora, int& totalPuntoRondaJugador);
+void mostrarCambioEmbaucadora(int& i, string& cartaEmbaucadora, int totalPuntoRondaJugador[]);
 
 //funciones para crear mazos
 void crearMazoNaipe(string mazoNaipe[]);
@@ -36,16 +36,22 @@ void crearMazos(string mazoNaipe[], string mazoPalo[]);
 
 void repartirCartasJugador(string mazoNaipe[], string mazoPalo[], string naipesJugador[], string palosJugador[]);
 
-void mostrarNombresJugadores(string nombreJugador1, string nombreJugador2, int &acuJ1, int &acuJ2);
+void mostrarNombresJugadores(string nombreJugador1, string nombreJugador2, int& acuJ1, int& acuJ2);
 
 void mostrarCartasjugadores(string naipesJugador1[], string palosJugador1[], int puntosJugador1[],
-                            string naipesJugador2[], string palosJugador2[], int puntosJugador2[]);
+    string naipesJugador2[], string palosJugador2[], int puntosJugador2[]);
 
 void puntosPorJugador(string naipeJugador[], string paloJugador[], int puntosJugador[], int cantCartas, string& cartaEmbaucadora);
 
-void mostrarGanador(int &acuJ1, int &acuJ2, string &nombreJugador1, string &nombreJugador2, int totalPuntoRondaJugador1[], int totalPuntoRondaJugador2[]);
+void calcularPuntos(int& i, int totalPuntoRondaJugador[], int puntosJugador[], int& acuJ, string& nombreJugador);
 
-void resumenPartida(string &nombreJugador1, string &nombreJugador2, int totalPuntoRondaJugador1[], int totalPuntoRondaJugador2[]);
+void mostrarGanador(int& acuJ1, int& acuJ2, string& nombreJugador1, string& nombreJugador2, int totalPuntoRondaJugador1[], int totalPuntoRondaJugador2[]);
+
+void resumenPartida(string& nombreJugador1, string& nombreJugador2, int totalPuntoRondaJugador1[], int totalPuntoRondaJugador2[], int acuJ1, int acuJ2);
+
+//Funcion para estadisticas
+
+void estadisticas();
 
 //Funcion para creditos
 void creditos();
