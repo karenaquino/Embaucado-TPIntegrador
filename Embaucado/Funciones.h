@@ -36,7 +36,7 @@ void crearMazos(string mazoNaipe[], string mazoPalo[]);
 
 void repartirCartasJugador(string mazoNaipe[], string mazoPalo[], string naipesJugador[], string palosJugador[]);
 
-void mostrarNombresJugadores(string nombreJugador1, string nombreJugador2);
+void mostrarNombresJugadores(string nombreJugador1, string nombreJugador2, int &acuJ1, int &acuJ2);
 
 void mostrarCartasjugadores(string naipesJugador1[], string palosJugador1[], int puntosJugador1[],
                             string naipesJugador2[], string palosJugador2[], int puntosJugador2[]);
