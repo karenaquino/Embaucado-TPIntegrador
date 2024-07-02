@@ -3,55 +3,49 @@
 #include <string>
 #include<cstdlib>
 #include<ctime>
+#include "colors.h"
 using namespace std;
 
-//declaraciones de funciones
+// FUNCION MENU
 void mostrarMenuPrincipal();
-//carga nombre jugadores
+
+//FUNCION CARGA DE JUGADORES
 void cargarJugadores(string& nombre1, string& nombre2);
 
-//reparte cartas del jugador 1
-void repartirCartasJugador1(string vJugador1[], int cantCartas, string vMazo[], int TAM);
+//FUNCION REPARTE CARTAS AMBOS JUGADORES
+void repartirCartasJugador(string mazoNaipe[], string mazoPalo[], string naipesJugador[], string palosJugador[]);
 
+//FUNCION MUETRA CARTA JUGADORES
+void mostrarCartasjugadores(string naipesJugador1[], string palosJugador1[], int puntosJugador1[], string naipesJugador2[], string palosJugador2[], int puntosJugador2[]);
 
-
-//reparte cartas del jugador 1
-void repartirCartasJugador2(string vJugador2[], int cantCartas, string vMazo[], int TAM);
-
-//void repartirCartas_Jugador2(string vJugador2[]);
-
-
-//mostrar cartas ambos jugadores
-void cartasjugadores(string vJugador1[], string vJugador2[], int cantCartas, string& nombre1, string& nombre2);
-
-//carta embaucadora
+//FUNCION GENERA CARTA EMBAUCADORA
 void generarEmbaucadora(string& cartaEmbaucadora);
-void mostrarCambioEmbaucadora(int& i, string& cartaEmbaucadora, int totalPuntoRondaJugador[]);
 
-//funciones para crear mazos
+//FUNCION GENERA NUEVA EMBAUCADORA Y SACRIFICA 20 PUNTOS
+void mostrarCambioEmbaucadora(int& i, string& cartaEmbaucadora, int totalPuntoRondaJugador[], int& acuJ);
+
+//FUNCIONES PARA CREAR MAZOS
 void crearMazoNaipe(string mazoNaipe[]);
 void crearMazoPalo(string mazoPalo[]);
 void crearMazos(string mazoNaipe[], string mazoPalo[]);
 
-
-void repartirCartasJugador(string mazoNaipe[], string mazoPalo[], string naipesJugador[], string palosJugador[]);
-
+//FUNCION MUESTAR LOS NOMBRES CON LOS PUNTOS ACUMULADOS
 void mostrarNombresJugadores(string nombreJugador1, string nombreJugador2, int& acuJ1, int& acuJ2);
 
-void mostrarCartasjugadores(string naipesJugador1[], string palosJugador1[], int puntosJugador1[],
-    string naipesJugador2[], string palosJugador2[], int puntosJugador2[]);
-
+//FUNCION CALCULA LOS PUNTOS TENIENDO EN CUENTA LA CARTA EMBAUCADORA
 void puntosPorJugador(string naipeJugador[], string paloJugador[], int puntosJugador[], int cantCartas, string& cartaEmbaucadora);
 
-void calcularPuntos(int& i, int totalPuntoRondaJugador[], int puntosJugador[], int& acuJ, string& nombreJugador);
+//FUNCION CALCULA LOS PUNTOS TOTALES DE LAS PARTIDAS
+void calcularPuntos(int& i, int totalPuntoRondaJugador1[], int puntosJugador1[], int& acuJ1, string& nombreJugador1, int totalPuntoRondaJugador2[], int puntosJugador2[], int& acuJ2, string& nombreJugador2);
 
-void mostrarGanador(int& acuJ1, int& acuJ2, string& nombreJugador1, string& nombreJugador2, int totalPuntoRondaJugador1[], int totalPuntoRondaJugador2[]);
+//FUNCION MUESTRA GANADOR DE LA PARTIDA
+void mostrarGanador(int& acuJ1, int& acuJ2, string& nombreJugador1, string& nombreJugador2, int totalPuntoRondaJugador1[], int totalPuntoRondaJugador2[], string& nombreJugadorPuntajeMax, int& puntajeMax);
 
+//FUNCION MUETRA RESUMAN DE PUNTOS POR PARTIDA Y EL TOTAL
 void resumenPartida(string& nombreJugador1, string& nombreJugador2, int totalPuntoRondaJugador1[], int totalPuntoRondaJugador2[], int acuJ1, int acuJ2);
 
-//Funcion para estadisticas
+//FUNCION MUESTRA JUGADOR CON PUNTAJE MAXIMO Y LO ALMACENA
+void estadisticas(string& nombreJugadorPuntajeMax, int& puntajeMax, int partidas);
 
-void estadisticas();
-
-//Funcion para creditos
+//FUNCION MUESTRA CREDITOS
 void creditos();

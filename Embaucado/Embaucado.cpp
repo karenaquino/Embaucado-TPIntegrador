@@ -5,167 +5,114 @@
 #include<ctime>
 #include <windows.h>
 #include <locale.h>
+
 using namespace std;
 
-/*
-    1-)menu
-        EMBAUCADO
----------------------
-1 - JUGAR
-2 - ESTAD�STICAS
-3 - CR�DITOS
----------------------
-0 - SALIR
-while
-
-
-  2-) Repartir
-  10, J, Q, K y A de las cuatro figuras Coraz�n, Diamantes, Picas y Tr�boles.
-  En total son 20 cartas.
-  En cada ronda los jugadores reciben cinco cartas al azar que se denominan mano.
-
-  2-)Adem�s, se da vuelta sobre la mesa una carta de las figuras.
- Esta carta se denomina embaucadora y es la que da nombre al juego.
- ejemplo: Carta embaucadora: Coraz�n
-
-  3-)Calcular Puntaje
-
-
-     Naipe	Puntaje
-        10	10
-        J	11
-        Q	12
-        K	15
-        A	20
-
-   4-)a partir de la ronda 2 que permite a los jugadores sacrificar 20 puntos de los acumulados para poder
-    cambiar la carta embaucadora
-    . Luego de haber recibido las cartas y que se haya revelado cu�l es la carta embaucadora de la ronda,
-    cada jugador puede decidir sacrificar 20 puntos para que la carta embaucadora se vuelva a obtener.
-    Si un jugador en una ronda utiliza este sacrificio de puntos entonces el otro jugador no puede utilizarlo.
-    S�lo pueden hacerlo si disponen de al menos 20 puntos para restar.
-    En la ronda 2, es el jugador 1 quien puede acceder a sacrificar puntos primero y si no lo hace, puede hacerlo el jugador 2.
-    En la ronda 3, es el jugador 2 quien puede acceder a sacrificar puntos primero y si no lo hace, puede hacerlo el jugador 1.
-
-*/
-//El s�mbolo & de ampersand se utiliza en C++ como declarador de referencia adem�s de ser el operador de direcci�n.
 int main()
 {
-    const int TAM = 20;
+    const int TAM = 20; //TAMA�O DEL VECTOR DE NAIPES ,PALOS
     int numero;
-    int ronda = 0;
+
     setlocale(LC_ALL, "SPANISH");
 
-    const int cantCartas = 5;
-    string cartaEmbaucadora;
+    const int cantCartas = 5;// CANTIDAD DE CARTAS POR JUGADORES
+    string cartaEmbaucadora; //ALMACENA CARTA EMBAUCADORA
 
-    string mazoNaipe[TAM] = {};
-    string mazoPalo[TAM] = {};
+    string mazoNaipe[TAM] = {};//ALMACENA NAIPES CREADOS EN LA FUNCION CREAR MAZO
+    string mazoPalo[TAM] = {};//ALMACENA PALO CREADOS EN LA FUNCION CREAR MAZO
 
-    string naipesJugador1[cantCartas] = {};
-    string naipesJugador2[cantCartas] = {};
+    string naipesJugador1[cantCartas] = {};//ALMACENA LOS NAIPES DEL JUGADOR 1
+    string naipesJugador2[cantCartas] = {};//ALMACENA LOS NAIPES DEL JUGADOR 2
 
-    string palosJugador1[cantCartas] = {};
-    string palosJugador2[cantCartas] = {};
+    string palosJugador1[cantCartas] = {};//ALMACENA LOS PALOS DE LOS NAIPES DEL JUGADOR 1
+    string palosJugador2[cantCartas] = {};//ALMACENA LOS PALOS DE LOS NAIPES DEL JUGADOR 2
 
-    int puntosJugador1[cantCartas] = {};
-    int puntosJugador2[cantCartas] = {};
-    bool cambioEmbaucadora = false;
+    int puntosJugador1[cantCartas] = {};//ALMACENA LOS VALORES DE LAS CARTAS DEL JUGADOR 1
+    int puntosJugador2[cantCartas] = {};//ALMACENA LOS VALORES DE LAS CARTAS DEL JUGADOR 2
 
-    char confirmaEmbaucadora;
+    char confirmaEmbaucadora;//ALMACENA LA OPCION DE SI CAMBIA O NO LA CARTA EMBAUCADORA
 
-    /* string vJugador1[cantCartas] = {};
-     string vJugador2[cantCartas] = {};*/
 
-    int totalPuntoRondaJugador1[3] = {};
-    int totalPuntoRondaJugador2[3] = {};
 
-    int acuJ1 = 0;
-    int acuJ2 = 0;
 
     //VARIABLES PARA ALMACENAR EL MEJOR PUNTAJE PARA LA PARTE DE ESTAD�STICAS
-    int puntajeMax;
+    int puntajeMax=0;
     string nombreJugadorPuntajeMax;
+    int partidas = 0;
 
-    srand(time(0));//semilla para numero random
+    srand(time(0));//SEMILLA PARA EL NUMERO RAMDOM
 
-    string nombreJugador1, nombreJugador2;
+    string nombreJugador1, nombreJugador2;//ALMACENA LOS NOMBRES DE LOS JUGADORES
 
-    while (true) {
+    while (true) { //WHILE PARA QUE NO SALGA A MENOS QUE SE INGRESE 0
+        int acuJ1 = 0;//ACUMULADORES DE LA SUMA DE LOS NAIPES DE CADA JUGADOR
+        int acuJ2 = 0;
+
+        int totalPuntoRondaJugador1[3] = {}; //VECTORES QUE GUARDAN LOS PUNTOS OBTENIDOS EN CADA RONDA PARA CADA JUGADOR
+        int totalPuntoRondaJugador2[3] = {};
 
         mostrarMenuPrincipal();
-        cin >> numero;
+        cin >> numero;//ALMACENA OPCION DEL MENU
         cout << endl;
         cout << endl;
-        cout << endl;
+
         system("cls");
 
         switch (numero) {
         case 1:
-            ronda++;
 
-            /// carga de jugadores
             cout << endl;
-
+            //SE LLAMA A FUNCION CARGA JUGADORES
             cargarJugadores(nombreJugador1, nombreJugador2);
 
             cout << endl;
-
-            for (int i = 0; i <= 2; i++)
+            partidas++; //CONTADOR DE PARTIDAS
+            for (int i = 0; i < 3; i++)
             {
-                //crear mazos
+                //SE LLAMA A FUNCION CREAR MAZO
                 crearMazos(mazoNaipe, mazoPalo);
                 //cartas jugador 1
-                cout << " \t\t\t EMBAUCADO \t\t " << endl;
-                cout << "-------------------------------------------------------------------------" << endl;
-                cout << "Ronda N:" << ronda << endl;
-                cout << endl;
 
+
+
+                cout << "     #### ##  ##  #####    ####  #    #  ####   ####  ####    ####    " << endl;
+                cout << "     #    # ## #  #    #  #    # #    # #      #    # #    # #    #  " << endl;
+                cout << "     #### #    #  #####   # ## # #    # #      # ## # #    # #    #  " << endl;
+                cout << "     #    #    #  #    #  #    # #    # #      #    # #    # #    #  " << endl;
+                cout << "     #### #    #  #####   #    #  ####   ####  #    # ####    ####   " << endl;
+
+
+                cout << "=========================================================================" << endl;
+                cout << "Ronda N:" << i + 1 << endl;
+
+                //REPARTE CARTAS AMBOS JUGADORES
                 repartirCartasJugador(mazoNaipe, mazoPalo, naipesJugador1, palosJugador1);
-
                 repartirCartasJugador(mazoNaipe, mazoPalo, naipesJugador2, palosJugador2);
 
+                //MUESTRA NOMBRES JUGADORS
                 mostrarNombresJugadores(nombreJugador1, nombreJugador2, acuJ1, acuJ2);
 
-                //genera cartaEmbaucadora
+                //CARTA EMBAUCADORA
                 generarEmbaucadora(cartaEmbaucadora);
 
+                //CALCULA PUNTOS POR JUGADOR
                 puntosPorJugador(naipesJugador1, palosJugador1, puntosJugador1, cantCartas, cartaEmbaucadora);
                 puntosPorJugador(naipesJugador2, palosJugador2, puntosJugador2, cantCartas, cartaEmbaucadora);
 
-                mostrarCartasjugadores(naipesJugador1, palosJugador1, puntosJugador1,
-                    naipesJugador2, palosJugador2, puntosJugador2);
-                //cartasjugadores(vJugador1, vJugador2, cantCartas, nombreJugador1, nombreJugador2);
+                //MUESTRA CARTA DE LOS JUGADORARES
+                mostrarCartasjugadores(naipesJugador1, palosJugador1, puntosJugador1, naipesJugador2, palosJugador2, puntosJugador2);
 
-
-                //muestra carta Embaucadora
+                //MUESTRA CARTA EMBAUCADORA
                 cout << endl;
                 cout << "-------------------------------------------------------------------------" << endl;
-                cout << "Carta Embaucadora:" << cartaEmbaucadora << endl;
+                cout << "Carta Embaucadora: " << cartaEmbaucadora << endl;
                 cout << "-------------------------------------------------------------------------" << endl;
-                cout << endl;
                 //---------------------------------------------------------------------------//
 
 
-                if (i == 0) {
-                    
-                    for (int j = 0; j < 5; j++)
-                    {
-                        totalPuntoRondaJugador1[i] += puntosJugador1[j];
-                    }
-                    
-                    acuJ1 += totalPuntoRondaJugador1[i];
-                    cout << "JUGADOR " << nombreJugador1 << endl;
-                    cout << "Puntos: " << totalPuntoRondaJugador1[i] << endl;
-                    cout << "---------------- " << endl;
-                    cout << "JUGADOR " << nombreJugador2 << endl;
-
-                    for (int j = 0; j < 5; j++)
-                    {
-                        totalPuntoRondaJugador2[i] += puntosJugador2[j];
-                    }
-                    acuJ2 += totalPuntoRondaJugador2[i];
-                    cout << "Puntos: " << totalPuntoRondaJugador2[i] << endl;
+                if (i == 0)
+                {   //CALCULA PUNTOS AMBOS JUGADORES
+                    calcularPuntos(i, totalPuntoRondaJugador1, puntosJugador1, acuJ1, nombreJugador1, totalPuntoRondaJugador2, puntosJugador2, acuJ2, nombreJugador2);
                 }
 
                 //RONDA 2
@@ -181,13 +128,10 @@ int main()
                     //PUEDE RESPONDER SI
                     if (confirmaEmbaucadora == 's' || confirmaEmbaucadora == 'S')
                     {
-                        mostrarCambioEmbaucadora(i, cartaEmbaucadora, totalPuntoRondaJugador1);
-                        cambioEmbaucadora = true;
-                       puntosPorJugador(naipesJugador1, palosJugador1, puntosJugador1, cantCartas, cartaEmbaucadora);
+                        mostrarCambioEmbaucadora(i, cartaEmbaucadora, totalPuntoRondaJugador1, acuJ1);
+                        puntosPorJugador(naipesJugador1, palosJugador1, puntosJugador1, cantCartas, cartaEmbaucadora);
                         puntosPorJugador(naipesJugador2, palosJugador2, puntosJugador2, cantCartas, cartaEmbaucadora);
-                        mostrarCartasjugadores(naipesJugador1, palosJugador1, puntosJugador1,
-                            naipesJugador2, palosJugador2, puntosJugador2);
-
+                        mostrarCartasjugadores(naipesJugador1, palosJugador1, puntosJugador1, naipesJugador2, palosJugador2, puntosJugador2);
                     }
 
                     //PUEDE RESPONDER NO
@@ -204,127 +148,79 @@ int main()
                             //JUGADOR 2, PUEDE RESPONDER QUE SI
                             if (confirmaEmbaucadora == 's' || confirmaEmbaucadora == 'S')
                             {
-                                mostrarCambioEmbaucadora(i, cartaEmbaucadora, totalPuntoRondaJugador2);
+                                mostrarCambioEmbaucadora(i, cartaEmbaucadora, totalPuntoRondaJugador2, acuJ2);
                                 puntosPorJugador(naipesJugador1, palosJugador1, puntosJugador1, cantCartas, cartaEmbaucadora);
                                 puntosPorJugador(naipesJugador2, palosJugador2, puntosJugador2, cantCartas, cartaEmbaucadora);
-                                mostrarCartasjugadores(naipesJugador1, palosJugador1, puntosJugador1,
-                                                       naipesJugador2, palosJugador2, puntosJugador2);
+                                mostrarCartasjugadores(naipesJugador1, palosJugador1, puntosJugador1, naipesJugador2, palosJugador2, puntosJugador2);
                             }
 
                             //JUGADOR 2, PUEDE RESPONDER QUE NO
                             else if (confirmaEmbaucadora == 'n' || confirmaEmbaucadora == 'N')
                             {
                                 cout << "No se modific� la carta Embaucadora, a continuaci�n se calcular�n los puntos de la ronda..." << endl;
-                                //CALCULAR PUNTAJES DE LA RONDA...
                             }
-
                         }
-
-
+                        else
+                        {
+                            cout << nombreJugador2 << ", no tenes los puntos necesarios para cambiar la carta Embaucadora." << endl;
+                            cout << "No se modificó la carta Embaucadora, a continuación se calcularán los puntos de la ronda..." << endl;
+                            cout << endl;
+                        }
                     }
-
-                    for (int j = 0; j < 5; j++)
-                    {
-                        totalPuntoRondaJugador1[i] += puntosJugador1[j];
-                    }
-                    acuJ1 += totalPuntoRondaJugador1[i];
-                    cout << "JUGADOR " << nombreJugador1 << endl;
-                    cout << "Puntos: " << totalPuntoRondaJugador1[i] << endl;
-                    cout << "---------------- " << endl;
-                    cout << "JUGADOR " << nombreJugador2 << endl;
-                    for (int j = 0; j < 5; j++)
-                    {
-                        totalPuntoRondaJugador2[i] += puntosJugador2[j];
-                    }
-                    acuJ2 += totalPuntoRondaJugador2[i];
-                    cout << " Puntos: " << totalPuntoRondaJugador2[i] << endl;
-
+                    calcularPuntos(i, totalPuntoRondaJugador1, puntosJugador1, acuJ1, nombreJugador1, totalPuntoRondaJugador2, puntosJugador2, acuJ2, nombreJugador2);
                 }
-
                 else if (i == 1 && acuJ2 >= 20)
-                {
+                {   //JUGADOR 1 NO TINEN PUNTOS ,SE LE PREGUNTA AL JUGADOR 2
                     cout << nombreJugador1 << ", no tenes los puntos necesarios para cambiar la carta Embaucadora." << endl;
                     cout << nombreJugador2 << ", �Deseas modificar la carta embaucadora actual?" << endl;
                     cout << "Se te descontar�n 20 puntos (S/N): ";
                     cin >> confirmaEmbaucadora;
                     if (confirmaEmbaucadora == 's' || confirmaEmbaucadora == 'S')
                     {
-                        mostrarCambioEmbaucadora(i, cartaEmbaucadora, totalPuntoRondaJugador2);
+                        mostrarCambioEmbaucadora(i, cartaEmbaucadora, totalPuntoRondaJugador2, acuJ2);
                         puntosPorJugador(naipesJugador1, palosJugador1, puntosJugador1, cantCartas, cartaEmbaucadora);
                         puntosPorJugador(naipesJugador2, palosJugador2, puntosJugador2, cantCartas, cartaEmbaucadora);
-                        mostrarCartasjugadores(naipesJugador1, palosJugador1, puntosJugador1,
-                                               naipesJugador2, palosJugador2, puntosJugador2);
-
+                        mostrarCartasjugadores(naipesJugador1, palosJugador1, puntosJugador1, naipesJugador2, palosJugador2, puntosJugador2);
                     }
                     else if (confirmaEmbaucadora == 'n' || confirmaEmbaucadora == 'N')
                     {
                         cout << "No se modific� la carta Embaucadora, a continuaci�n se calcular�n los puntos de la ronda..." << endl;
                     }
-                    for (int j = 0; j < 5; j++)
-                    {
-                        totalPuntoRondaJugador1[i] += puntosJugador1[j];
-                    }
-                    acuJ1 += totalPuntoRondaJugador1[i];
-                    cout << "JUGADOR " << nombreJugador1 << endl;
-                    cout << "Puntos: " << totalPuntoRondaJugador1[i] << endl;
-                    cout << "---------------- " << endl;
-                    cout << "JUGADOR " << nombreJugador2 << endl;
-                    for (int j = 0; j < 5; j++)
-                    {
-                        totalPuntoRondaJugador2[i] += puntosJugador2[j];
-                    }
-                    acuJ2 += totalPuntoRondaJugador2[i];
-                    cout << " Puntos: " << totalPuntoRondaJugador2[i] << endl;
-                }
+                    calcularPuntos(i, totalPuntoRondaJugador1, puntosJugador1, acuJ1, nombreJugador1, totalPuntoRondaJugador2, puntosJugador2, acuJ2, nombreJugador2);
 
+                }
                 else if (i == 1 && acuJ1 < 20 && acuJ2 < 20)
-                {
+                {   //NINGUNO DE LOS JUGADORES TIENEN PUNTOS SUFICIENTES
                     cout << nombreJugador1 << ", " << nombreJugador2 << ", no tienen los puntos necesarios para cambiar la carta Embaucadora." << endl;
                     cout << "A continuaci�n se calcular�n los puntos de la ronda ..." << endl;
-                    for (int j = 0; j < 5; j++)
-                    {
-                        totalPuntoRondaJugador1[i] += puntosJugador1[j];
-                    }
-                    acuJ1 += totalPuntoRondaJugador1[i];
-                    cout << "JUGADOR " << nombreJugador1 << endl;
-                    cout << "Puntos: " << totalPuntoRondaJugador1[i] << endl;
-                    cout << "---------------- " << endl;
-                    cout << "JUGADOR " << nombreJugador2 << endl;
-                    for (int j = 0; j < 5; j++)
-                    {
-                        totalPuntoRondaJugador2[i] += puntosJugador2[j];
-                    }
-                    acuJ2 += totalPuntoRondaJugador2[i];
-                    cout << " Puntos: " << totalPuntoRondaJugador2[i] << endl;
-                }
 
+                    calcularPuntos(i, totalPuntoRondaJugador1, puntosJugador1, acuJ1, nombreJugador1, totalPuntoRondaJugador2, puntosJugador2, acuJ2, nombreJugador2);
+                }
                 if (i == 2 && acuJ2 >= 20)
-                {
+                {   //RONDA 3 SE LE PREGUNTA AL JUGADOR 2
                     cout << nombreJugador2 << ", �Deseas modificar la carta embaucadora actual?" << endl;
                     cout << "Se te descontar�n 20 puntos (S/N): ";
                     cin >> confirmaEmbaucadora;
                     if (confirmaEmbaucadora == 's' || confirmaEmbaucadora == 'S')
                     {
-                        mostrarCambioEmbaucadora(i, cartaEmbaucadora, totalPuntoRondaJugador2);
+                        mostrarCambioEmbaucadora(i, cartaEmbaucadora, totalPuntoRondaJugador2, acuJ2);
                         puntosPorJugador(naipesJugador1, palosJugador1, puntosJugador1, cantCartas, cartaEmbaucadora);
                         puntosPorJugador(naipesJugador2, palosJugador2, puntosJugador2, cantCartas, cartaEmbaucadora);
-                        mostrarCartasjugadores(naipesJugador1, palosJugador1, puntosJugador1,
-                                               naipesJugador2, palosJugador2, puntosJugador2);
+                        mostrarCartasjugadores(naipesJugador1, palosJugador1, puntosJugador1, naipesJugador2, palosJugador2, puntosJugador2);
                     }
                     else if (confirmaEmbaucadora == 'n' || confirmaEmbaucadora == 'N')
                     {
                         if (acuJ1 >= 20)
-                        {
+                        {   //SI EL JUGADOR 2 NO QUISO CAMBIAR SE LE PREGUNTA AL JUGADOR 1
                             cout << nombreJugador1 << ", �Deseas modificar la carta embaucadora actual?" << endl;
                             cout << "Se te descontar�n 20 puntos (S/N): ";
                             cin >> confirmaEmbaucadora;
                             if (confirmaEmbaucadora == 's' || confirmaEmbaucadora == 'S')
                             {
-                                mostrarCambioEmbaucadora(i, cartaEmbaucadora, totalPuntoRondaJugador1);
+                                mostrarCambioEmbaucadora(i, cartaEmbaucadora, totalPuntoRondaJugador1, acuJ1);
                                 puntosPorJugador(naipesJugador1, palosJugador1, puntosJugador1, cantCartas, cartaEmbaucadora);
                                 puntosPorJugador(naipesJugador2, palosJugador2, puntosJugador2, cantCartas, cartaEmbaucadora);
-                                mostrarCartasjugadores(naipesJugador1, palosJugador1, puntosJugador1,
-                                    naipesJugador2, palosJugador2, puntosJugador2);
+                                mostrarCartasjugadores(naipesJugador1, palosJugador1, puntosJugador1, naipesJugador2, palosJugador2, puntosJugador2);
                             }
                             else if (confirmaEmbaucadora == 'n' || confirmaEmbaucadora == 'N')
                             {
@@ -340,96 +236,54 @@ int main()
                         }
                     }
 
-                    for (int j = 0; j < 5; j++)
-                    {
-                        totalPuntoRondaJugador1[i] += puntosJugador1[j];
-                    }
-                    acuJ1 += totalPuntoRondaJugador1[i];
-                    cout << "JUGADOR " << nombreJugador1 << endl;
-                    cout << "Puntos: " << totalPuntoRondaJugador1[i] << endl;
-                    cout << "---------------- " << endl;
-                    cout << "JUGADOR " << nombreJugador2 << endl;
-                    for (int j = 0; j < 5; j++)
-                    {
-                        totalPuntoRondaJugador2[i] += puntosJugador2[j];
-                    }
-                    acuJ2 += totalPuntoRondaJugador2[i];
-                    cout << " Puntos: " << totalPuntoRondaJugador2[i] << endl;
+
+                    calcularPuntos(i, totalPuntoRondaJugador1, puntosJugador1, acuJ1, nombreJugador1, totalPuntoRondaJugador2, puntosJugador2, acuJ2, nombreJugador2);
 
                 }
                 else if (i == 2 && acuJ1 >= 20)
-                {
+                {   //RONDA 2 JUGADOR 2 NO TIENEN PUNTOS SE LE PREGUNTA AL JUGADOR 1
                     cout << nombreJugador2 << ", no tenes los puntos necesarios para cambiar la carta Embaucadora." << endl << endl;
                     cout << nombreJugador1 << ", �Deseas modificar la carta embaucadora actual?" << endl;
                     cout << "Se te descontar�n 20 puntos (S/N): ";
                     cin >> confirmaEmbaucadora;
                     if (confirmaEmbaucadora == 's' || confirmaEmbaucadora == 'S')
                     {
-                        mostrarCambioEmbaucadora(i, cartaEmbaucadora, totalPuntoRondaJugador1);
+                        mostrarCambioEmbaucadora(i, cartaEmbaucadora, totalPuntoRondaJugador1, acuJ1);
                         puntosPorJugador(naipesJugador1, palosJugador1, puntosJugador1, cantCartas, cartaEmbaucadora);
                         puntosPorJugador(naipesJugador2, palosJugador2, puntosJugador2, cantCartas, cartaEmbaucadora);
-                        mostrarCartasjugadores(naipesJugador1, palosJugador1, puntosJugador1,
-                            naipesJugador2, palosJugador2, puntosJugador2);
+                        mostrarCartasjugadores(naipesJugador1, palosJugador1, puntosJugador1, naipesJugador2, palosJugador2, puntosJugador2);
                     }
                     else if (confirmaEmbaucadora == 'n' || confirmaEmbaucadora == 'N')
                     {
                         cout << "No se modific� la carta Embaucadora, a continuaci�n se calcular�n los puntos de la ronda..." << endl;
                     }
 
-                    for (int j = 0; j < 5; j++)
-                    {
-                        totalPuntoRondaJugador1[i] += puntosJugador1[j];
-                    }
-                    acuJ1 += totalPuntoRondaJugador1[i];
-                    cout << "JUGADOR " << nombreJugador1 << endl;
-                    cout << "Puntos: " << totalPuntoRondaJugador1[i] << endl;
-                    cout << "---------------- " << endl;
-                    cout << "JUGADOR " << nombreJugador2 << endl;
-                    for (int j = 0; j < 5; j++)
-                    {
-                        totalPuntoRondaJugador2[i] += puntosJugador2[j];
-                    }
-                    acuJ2 += totalPuntoRondaJugador2[i];
-                    cout << " Puntos: " << totalPuntoRondaJugador2[i] << endl;
+                    calcularPuntos(i, totalPuntoRondaJugador1, puntosJugador1, acuJ1, nombreJugador1, totalPuntoRondaJugador2, puntosJugador2, acuJ2, nombreJugador2);
                 }
+
                 else if (i == 2 && acuJ2 < 20 && acuJ1 < 20)
-                {
+                {   //RONDA 2 NINGUNO DE LOS 2 JUGADORES TIENEN PUNTOS SUFICIENTES
                     cout << nombreJugador2 << ", " << nombreJugador1 << ", no tienen los puntos necesarios para cambiar la carta Embaucadora." << endl;
                     cout << "A continuaci�n se calcular�n los puntos de la ronda ..." << endl;
 
-                    for (int j = 0; j < 5; j++)
-                    {
-                        totalPuntoRondaJugador1[i] += puntosJugador1[j];
-                    }
-                    acuJ1 += totalPuntoRondaJugador1[i];
-                    cout << "JUGADOR " << nombreJugador1 << endl;
-                    cout << "Puntos: " << totalPuntoRondaJugador1[i] << endl;
-                    cout << "---------------- " << endl;
-                    cout << "JUGADOR " << nombreJugador2 << endl;
-                    for (int j = 0; j < 5; j++)
-                    {
-                        totalPuntoRondaJugador2[i] += puntosJugador2[j];
-                    }
-                    acuJ2 += totalPuntoRondaJugador2[i];
-                    cout << " Puntos: " << totalPuntoRondaJugador2[i] << endl;
+                    calcularPuntos(i, totalPuntoRondaJugador1, puntosJugador1, acuJ1, nombreJugador1, totalPuntoRondaJugador2, puntosJugador2, acuJ2, nombreJugador2);
                 }
 
                 system("pause");
                 system("cls");
 
-
-
-                ronda++;
             }
 
             resumenPartida(nombreJugador1, nombreJugador2, totalPuntoRondaJugador1, totalPuntoRondaJugador2, acuJ1, acuJ2);
-            mostrarGanador(acuJ1, acuJ2, nombreJugador1, nombreJugador2, totalPuntoRondaJugador1, totalPuntoRondaJugador2);
+
+            mostrarGanador(acuJ1, acuJ2, nombreJugador1, nombreJugador2, totalPuntoRondaJugador1, totalPuntoRondaJugador2, nombreJugadorPuntajeMax, puntajeMax);
+
             system("pause");
             system("cls");
             break;
 
         case 2:
-            estadisticas();
+            estadisticas(nombreJugadorPuntajeMax, puntajeMax, partidas);
             system("pause");
             system("cls");
             break;
@@ -445,13 +299,3 @@ int main()
         }
     }
 }
-
-
-
-
-
-
-
-
-
-

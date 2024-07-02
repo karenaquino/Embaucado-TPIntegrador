@@ -2,14 +2,23 @@
 #include <string>
 #include "funciones.h"
 #include<cstdlib>
+#include <stdlib.h>
 #include<ctime>
 #include <windows.h>
 
+
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+
+
+
+
 using namespace std;
 
+//FUNCION MENU
 void mostrarMenuPrincipal()
 {
+    SetConsoleTextAttribute(hConsole, 15);
     cout << endl;
     cout << endl;
     cout << " #######  ##   ##  #####      ###    ##   ##   #####     ###    #####     #####  " << endl;
@@ -20,70 +29,84 @@ void mostrarMenuPrincipal()
     cout << " ##       ##   ##  ##   ##  ##   ##  ##   ##  ##   ##  ##   ##  ##  ##   ##   ## " << endl;
     cout << " #######  ##   ##  #####    ##   ##   #####    #####   ##   ##  #####     #####  " << endl;
     cout << endl;
-    cout << "\t\t ======================================" << endl;
-    cout << "\t\t=|                                    |=" << endl;
-    cout << "\t\t=|        ---------------------       |=" << endl;
-    cout << "\t\t=|             1 - JUGAR              |=" << endl;
-    cout << "\t\t=|             2 - ESTAD�STICAS       |=" << endl;
-    cout << "\t\t=|             3 - CR�DITOS           |=" << endl;
-    cout << "\t\t=|        ---------------------       |=" << endl;
-    cout << "\t\t=|             0 - SALIR              |=" << endl;
-    cout << "\t\t=|                                    |=" << endl;
-    cout << "\t\t ======================================" << endl;
+
+    cout << "             \t ======================================" << endl;
+    cout << "             \t=|                                    |=" << endl;
+    cout << "    *  " << "  \t=|        ---------------------       |=" << "      *   *    " << endl;
+    cout << "   *** " << "  \t=|             1 - JUGAR              |=" << "     *** ***   " << endl;
+    cout << "  *****" << "  \t=|             2 - ESTAD�STICAS       |=" << "     *******    " << endl;
+    cout << "   *** " << "  \t=|             3 - CR�DITOS           |=" << "      *****    " << endl;
+    cout << "    *  " << "  \t=|        ---------------------       |= " << "       *    " << endl;
+    cout << "             \t=|             0 - SALIR              |=" << endl;
+    cout << "             \t=|                                    |=" << endl;
+    cout << "             \t ======================================" << endl;
     cout << endl;
     cout << "\t\t    Jugadores Ingresen una Opcion: ";
 }
 
+
+
+//FUNCION CARGA DE JUGADORES
 void cargarJugadores(string& nombre1, string& nombre2)
 {
     char opcion;
     int cambioNombre;
-    cout << "\t\t ----------------------------------------------   " << endl;
-    cout << "\t\t  Antes de comenzar deben registrar sus nombres:  " << endl;
-    cout << "\t\t                                                  " << endl;
-    cout << "\t\t  Nombre del Jugador 1: ";
+
+    cout << endl;
+    cout << endl;
+    cout << " #######  ##   ##  #####      ###    ##   ##   #####     ###    #####     #####  " << endl;
+    cout << " ##       ### ###  ##   ##   ## ##   ##   ##  ##   ##   ## ##   ##  ##   ##   ## " << endl;
+    cout << " ##       #######  ##   ##  ##   ##  ##   ##  ##       ##   ##  ##   ##  ##   ## " << endl;
+    cout << " #####    ## # ##  ######   ##   ##  ##   ##  ##       ##   ##  ##   ##  ##   ## " << endl;
+    cout << " ##       ##   ##  ##   ##  #######  ##   ##  ##       #######  ##   ##  ##   ## " << endl;
+    cout << " ##       ##   ##  ##   ##  ##   ##  ##   ##  ##   ##  ##   ##  ##  ##   ##   ## " << endl;
+    cout << " #######  ##   ##  #####    ##   ##   #####    #####   ##   ##  #####     #####  " << endl;
+    cout << endl;
+    cout << "================================================================================" << endl;
+    cout << endl;
+    cout << "\t  Antes de comenzar deben registrar sus nombres:  " << endl;
+    cout << "\t                                                  " << endl;
+    cout << "\t  Nombre del Jugador 1: ";
     cin >> nombre1;
-    cout << "\t\t  Nombre del Jugador 2: ";
+    cout << "\t  Nombre del Jugador 2: ";
     cin >> nombre2;
     cout << endl;
 
     do
     {
-        cout << "\t\t  Confirmar nombres (S/N): ";
+        cout << "\t  Confirmar nombres (S/N): ";
         cin >> opcion;
         cout << endl;
-
-
+        //SI INGRESA QUE NO PREGUNTA CUAL CAMBIAR A FINDE NO CARGAR NUEVAMENTE LOS 2
         if (opcion == 'N' || opcion == 'n')
         {
-            cout << "\t\tIngrese el numero de Jugador que desea cambiar: ";
+            cout << "\tIngrese el numero de Jugador que desea cambiar: ";
 
             cin >> cambioNombre;
             cout << endl;
             if (cambioNombre == 1)
             {
-
-                cout << "\t\tNombre del Jugador 1: ";
+                cout << "\tNombre del Jugador 1: ";
                 cin >> nombre1;
             }
             else if (cambioNombre == 2)
             {
-                cout << "\t\t ----------------------------------------------   " << endl;
+                cout << "================================================================================" << endl;
 
                 cout << "\t\tNombre del Jugador 2: ";
                 cin >> nombre2;
             }
             cout << endl;
-            cout << "\t\t ----------------------------------------------   " << endl;
-            cout << "\t\tConfirmar nombres (S/N): ";
+            cout << "================================================================================" << endl;
+            cout << "\tConfirmar nombres (S/N): ";
             cin >> opcion;
         }
         else
         {
-
+            //SI INGRESA CUALQUIER OTRO CARACTER DISTINTO DE (S/N) REPITE EL MENSAJE
             cout << endl;
-            cout << "\t\t ----------------------------------------------   " << endl;
-            cout << "\t\t -------INGRESE UNA OPCION VALIDA (S/N):-------   " << endl;
+            cout << "\t ----------------------------------------------   " << endl;
+            cout << "\t -------INGRESE UNA OPCION VALIDA (S/N):-------   " << endl;
             cout << endl;
             cout << endl;
             cout << endl;
@@ -92,6 +115,9 @@ void cargarJugadores(string& nombre1, string& nombre2)
     system("cls");
 }
 
+
+
+//FUNCIONES PARA CREAR MAZOS
 void crearMazos(string mazoNaipe[], string mazoPalo[])
 {
     crearMazoNaipe(mazoNaipe);
@@ -131,10 +157,9 @@ void crearMazoPalo(string mazoPalo[])
     }
 }
 
-void repartirCartasJugador(string mazoNaipe[],
-    string mazoPalo[],
-    string naipesJugador[],
-    string palosJugador[])
+
+//FUNCION REPARTE CARTAS AMBOS JUGADORES
+void repartirCartasJugador(string mazoNaipe[], string mazoPalo[], string naipesJugador[], string palosJugador[])
 {
     int contadorCartas = 0;
 
@@ -151,13 +176,8 @@ void repartirCartasJugador(string mazoNaipe[],
             // si es verdadero almacena el palo y el naipe en su respectivo vector, si es falso no hace nada y genera numero nuevo.
             // num2 lo inicialize en 1
             num2 = num1;
-            //  cout<<num2<<"----2--"<<endl;
-
             naipesJugador[contadorCartas] = mazoNaipe[num1];
             palosJugador[contadorCartas] = mazoPalo[num1];
-
-            //vJugador1[k]=vMazo[num1];
-
             contadorCartas++; //incrementa contador para las 5 cartas
         }
         mazoNaipe[num1] = "Cero";
@@ -166,85 +186,11 @@ void repartirCartasJugador(string mazoNaipe[],
 
 }
 
-//reparte cartas jugador 1
 
-void repartirCartasJugador1(string vJugador1[], int cantCartas, string vMazo[], int TAM)
-{
-    int k = 0;
-    int num1, num2 = 1;
-    while (k < 5)
-    {
-        num1 = 1 + (rand() % (20 - k));//genera un numero random del 1 al 20 lo almacena en num1 y
-        // le resto k que se van poniendo en cero
-
-        if (num1 != num2 && vMazo[num1] != "Cero")  //evaluo si son iguales num2 lo inicialize en 1 si son distintos almacena sino no hace nada y genera numero nuevo
-        {
-            num2 = num1;
-            //  cout<<num2<<"----2--"<<endl;
-            vJugador1[k] = vMazo[num1];
-
-            k++; //incrementa contador para las 5 cartas
-        }
-        vMazo[num1] = "Cero";//se reescribe el vector del mazo con las cartas entregadas al jugador 1 para que no le toquen las mismas al jugador2
-    }
-}
-
-//reparte cartas jugador 2
-
-void repartirCartasJugador2(string vJugador2[], int cantCartas, string vMazo[], int TAM)
-{
-    int num3, num4 = 1;
-
-    int l = 0;
-    while (l < 5)
-    {
-        num3 = 1 + (rand() % 15);//genera un numero random del 1 al 15 ya que repartio 5 lo almacena en num3
-
-        if (num3 != num4 && vMazo[num3] != "Cero")  //evaluo si son iguales num4 lo inicialize en 1
-        {
-            //si son distintos almacena sino no hace nada y genera numero nuevo
-
-            num4 = num3;
-
-            vJugador2[l] = vMazo[num3];
-
-            l++; //incrementa contador para las 5 cartas
-        }
-        vMazo[num3] = "Cero";//se reescribe el vector del mazo con las cartas entregadas al jugador 2 para que no le toquen las mismas
-    }
-
-}
-//mostrar cartas jugador 1
-
-//mostrar cartas jugador 2
-
-//Genera carta Embaucadora
-void generarEmbaucadora(string& cartaEmbaucadora)
-{
-
-    string vPalo[] = { "Corazon","Diamante","Pica","Trebol" };
-
-    cartaEmbaucadora = vPalo[(rand() % 4)];
-}
-
-void cartasjugadores(string vJugador1[], string vJugador2[], int cantCartas, string& nombreJugador1, string& nombreJugador2)
-{
-
-    int z;
-    cout << "---------------------------------------------------------------" << endl;
-    cout << "Jugador 1:" << nombreJugador1 << " \t\t  " << "Jugador 2:" << nombreJugador2 << endl;
-    cout << "---------------------------------------------------------------" << endl;
-    cout << endl;
-
-    for (z = 0; z < 5; z++)
-    {
-
-        cout << "\t" << vJugador1[z] << " \t\t\t " << vJugador2[z] << endl;
-    }
-}
-
+//FUNCION MUETRA CARTA JUGADORES
 void mostrarNombresJugadores(string nombreJugador1, string nombreJugador2, int& acuJ1, int& acuJ2)
 {
+
 
     cout << "-------------------------------------------------------------------------" << endl;
     cout << "Jugador 1:" << nombreJugador1 << " (" << acuJ1 << " puntos) \t\t  " << "Jugador 2:" << nombreJugador2 << " (" << acuJ2 << " puntos)" << endl;
@@ -253,22 +199,35 @@ void mostrarNombresJugadores(string nombreJugador1, string nombreJugador2, int& 
 
 }
 
-void mostrarCartasjugadores(string naipesJugador1[], string palosJugador1[], int puntosJugador1[],
-    string naipesJugador2[], string palosJugador2[], int puntosJugador2[])
+
+
+//FUNCION GENERA CARTA EMBAUCADORA
+void generarEmbaucadora(string& cartaEmbaucadora)
+{
+    string vPalo[] = { "Corazon","Diamante","Pica","Trebol" };
+
+    cartaEmbaucadora = vPalo[(rand() % 4)];
+}
+
+
+
+//FUNCION MUETRA CARTA JUGADORES
+void mostrarCartasjugadores(string naipesJugador1[], string palosJugador1[], int puntosJugador1[], string naipesJugador2[], string palosJugador2[], int puntosJugador2[])
 {
     for (int i = 0; i < 5; i++)
     {
-        cout << " " << puntosJugador1[i] << "\t " << naipesJugador1[i] << " de " << palosJugador1[i] << "\t\t" << " " << puntosJugador2[i] << "\t" << naipesJugador2[i] << " de " << palosJugador2[i] << endl;
+        cout << " " << puntosJugador1[i] << "\t " << naipesJugador1[i] << " de " << palosJugador1[i] << "\t\t\t" << " " << puntosJugador2[i] << "\t" << naipesJugador2[i] << " de " << palosJugador2[i] << endl;
     }
 }
 
+
+//FUNCION CALCULA LOS PUNTOS TENIENDO EN CUENTA LA CARTA EMBAUCADORA
 void puntosPorJugador(string naipeJugador[], string paloJugador[], int puntosJugador[], int cantCartas, string& cartaEmbaucadora)
 {
     int x;
 
     for (x = 0; x < 5; x++)
     {
-
         if (paloJugador[x] == cartaEmbaucadora)
         {
             puntosJugador[x] = 0;
@@ -297,44 +256,73 @@ void puntosPorJugador(string naipeJugador[], string paloJugador[], int puntosJug
 }
 
 
-//Opcion 3 creditos
+//FUNCION MUESTRA CREDITOS
 void creditos()
 {
-    cout << "Grupo: 25" << endl << endl;
-    cout << "Integrantes:" << endl;
+    cout << " ## ##   ### ##   ##  ###  ### ##    ## ##            ## ##    ###### " << endl;
+    cout << "##   ##   ##  ##  ##   ##   ##  ##  ##   ##           ##  ##   ##     " << endl;
+    cout << "##        ##  ##  ##   ##   ##  ##  ##   ##               ##   ## ##  " << endl;
+    cout << "##  ###   ## ##   ##   ##   ##  ##  ##   ##              ##        ## " << endl;
+    cout << "##   ##   ## ##   ##   ##   ## ##   ##   ##             ##     ##  ## " << endl;
+    cout << "##   ##   ##  ##  ##   ##   ##      ##   ##            #   ##  ##  ## " << endl;
+    cout << " ## ##   #### ##   ## ##   ####      ## ##            ######     ###  " << endl;
+    cout << endl;
+    cout << "+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::+" << endl;
+    cout << "\t\t\t     INTEGRANTES:" << endl;
+    cout << "+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::+" << endl;
+    cout << endl;
     cout << "Legajo     Apellido y Nombre:" << endl;
+    cout << endl;
     cout << "29680      Aquino, Karen " << endl;
     cout << "30901      Benitez, Jorge Ezequiel" << endl;
     cout << "29822      Martin, Matias" << endl;
-    cout << "30489      Morales, Juan Pablo" << endl;
+    cout << "30482      Morales, Juan Pablo" << endl;
+    cout << endl;
 }
 
-void mostrarCambioEmbaucadora(int& i, string& cartaEmbaucadora, int totalPuntoRondaJugador[])
+//FUNCION GENERA NUEVA EMBAUCADORA Y SACRIFICA 20 PUNTOS
+void mostrarCambioEmbaucadora(int& i, string& cartaEmbaucadora, int totalPuntoRondaJugador[], int& acuJ)
 {
     SetConsoleTextAttribute(hConsole, 4);
     generarEmbaucadora(cartaEmbaucadora);
     cout << "-------------------------------------------------------------------------" << endl;
     cout << "Nueva Carta Embaucadora: " << cartaEmbaucadora << endl;
     cout << "-------------------------------------------------------------------------" << endl;
+    cout << "Puntos Acumulados: " << (totalPuntoRondaJugador[i - 1] - 20) << endl;
+    cout << "-------------------------------------------------------------------------" << endl;
+    cout << endl;
+
+    totalPuntoRondaJugador[i - 1] = (totalPuntoRondaJugador[i - 1] - 20);
+    acuJ -= 20;
+
     SetConsoleTextAttribute(hConsole, 15);
-    totalPuntoRondaJugador[i] -= 20;
+
 }
 
-void calcularPuntos(int& i, int totalPuntoRondaJugador[], int puntosJugador[], int& acuJ, string& nombreJugador, string& cartaEmbaucadora)
+
+//FUNCION CALCULA LOS PUNTOS TOTALES DE LAS PARTIDAS
+void calcularPuntos(int& i, int totalPuntoRondaJugador1[], int puntosJugador1[], int& acuJ1, string& nombreJugador1, int totalPuntoRondaJugador2[], int puntosJugador2[], int& acuJ2, string& nombreJugador2)
 {
     for (int j = 0; j < 5; j++)
     {
-        totalPuntoRondaJugador[i] += puntosJugador[j];
+        totalPuntoRondaJugador1[i] += puntosJugador1[j];
+        totalPuntoRondaJugador2[i] += puntosJugador2[j];
     }
-    acuJ += totalPuntoRondaJugador[i];
+    acuJ1 += totalPuntoRondaJugador1[i];
+    acuJ2 += totalPuntoRondaJugador2[i];
 
     cout << endl;
-    cout << "JUGADOR " << nombreJugador << endl;
-    cout << "Puntos: " << totalPuntoRondaJugador[i] << endl;
-    cout << "---------------- " << endl;
+    cout << "-------------------------------------------------------------------------" << endl;
+    cout << "JUGADOR 1 " << nombreJugador1 << "                           " << "JUGADOR 2" << nombreJugador2 << endl;
+    cout << "Puntos: " << totalPuntoRondaJugador1[i] << "                                " << "Puntos: " << totalPuntoRondaJugador2[i] << endl;
+    cout << endl;
+    cout << "=========================================================================" << endl;
+    cout << endl;
     cout << endl;
 }
 
+
+//FUNCION MUETRA RESUMAN DE PUNTOS POR PARTIDA Y EL TOTAL
 void resumenPartida(string& nombreJugador1, string& nombreJugador2, int totalPuntoRondaJugador1[], int totalPuntoRondaJugador2[], int acuJ1, int acuJ2)
 {
     SetConsoleTextAttribute(hConsole, 9);
@@ -347,33 +335,52 @@ void resumenPartida(string& nombreJugador1, string& nombreJugador2, int totalPun
     cout << " #######  ##   ##  #####    ##   ##   #####    #####   ##   ##  #####     #####  " << endl;
     cout << endl;
     cout << "\t\t\t RESUMEN DE PARTIDA: " << endl;
-    cout << "+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::" << endl;
+    cout << "+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::+" << endl;
     cout << endl;
     cout << " \t\t\t" << nombreJugador1 << " VS " << nombreJugador2 << endl;
-    cout << "RONDA 1: \t\t " << totalPuntoRondaJugador1[0] << " \t " << totalPuntoRondaJugador2[0] << endl;
-    cout << "RONDA 2: \t\t " << totalPuntoRondaJugador1[1] << " \t " << totalPuntoRondaJugador2[1] << endl;
-    cout << "RONDA 3: \t\t " << totalPuntoRondaJugador1[2] << " \t " << totalPuntoRondaJugador2[2] << endl;
-    cout << "TOTAL:   \t\t " << acuJ1 << " \t " << acuJ2 << endl;
     cout << endl;
-    cout << "+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::" << endl;
+    cout << "RONDA 1: \t\t " << totalPuntoRondaJugador1[0] << " \t " << totalPuntoRondaJugador2[0] << endl;
+
+    cout << "RONDA 2: \t\t " << totalPuntoRondaJugador1[1] << " \t " << totalPuntoRondaJugador2[1] << endl;
+
+    cout << "RONDA 3: \t\t " << totalPuntoRondaJugador1[2] << " \t " << totalPuntoRondaJugador2[2] << endl;
+
+    cout << "--------------------------------------------------------------------------------" << endl;
+    cout << "TOTAL:   \t\t " << acuJ1 << " \t " << acuJ2 << endl;
+
+    cout << "+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::+" << endl;
 }
 
-void mostrarGanador(int& acuJ1, int& acuJ2, string& nombreJugador1, string& nombreJugador2, int totalPuntoRondaJugador1[], int totalPuntoRondaJugador2[])
+
+//FUNCION MUESTRA GANADOR DE LA PARTIDA
+void mostrarGanador(int& acuJ1, int& acuJ2, string& nombreJugador1, string& nombreJugador2, int totalPuntoRondaJugador1[], int totalPuntoRondaJugador2[], string& nombreJugadorPuntajeMax, int& puntajeMax)
 {
     int rondaMaximaJ1;
     int rondaMaximaJ2;
 
     if (acuJ1 > acuJ2)
     {
-        cout << "+-------------------------------------------------------------------------------+" << endl;
+        cout << "+------------------------------------------------------------------------------+" << endl;
         cout << "\t\t�GANADOR: " << nombreJugador1 << " CON " << acuJ1 << " PUNTOS!" << endl;
-        cout << "+-------------------------------------------------------------------------------+" << endl;
+        cout << "+------------------------------------------------------------------------------+" << endl;
+
+        if (acuJ1 > puntajeMax)
+        {
+            nombreJugadorPuntajeMax = nombreJugador1;
+            puntajeMax = acuJ1;
+        }
     }
     else if (acuJ2 > acuJ1)
     {
         cout << "+-------------------------------------------------------------------------------+" << endl;
         cout << "\t\t�GANADOR: " << nombreJugador2 << " CON " << acuJ2 << " PUNTOS!" << endl;
         cout << "+-------------------------------------------------------------------------------+" << endl;
+
+        if (acuJ2 > puntajeMax)
+        {
+            nombreJugadorPuntajeMax = nombreJugador2;
+            puntajeMax = acuJ2;
+        }
     }
 
     else if (acuJ1 == acuJ2)
@@ -400,12 +407,24 @@ void mostrarGanador(int& acuJ1, int& acuJ2, string& nombreJugador1, string& nomb
             cout << "+-------------------------------------------------------------------------------+" << endl;
             cout << "\t\t�GANADOR: " << nombreJugador1 << " OBTUVISTE EL MAYOR PUNTAJE EN UNA RONDA!" << endl;
             cout << "+-------------------------------------------------------------------------------+" << endl;
+
+            if (acuJ1 > puntajeMax)
+            {
+                nombreJugadorPuntajeMax = nombreJugador1;
+                puntajeMax = acuJ1;
+            }
         }
         else if (rondaMaximaJ2 > rondaMaximaJ1)
         {
             cout << "+-------------------------------------------------------------------------------+" << endl;
             cout << "\t\t�GANADOR: " << nombreJugador2 << " OBTUVISTE EL MAYOR PUNTAJE EN UNA RONDA!" << endl;
             cout << "+-------------------------------------------------------------------------------+" << endl;
+
+            if (acuJ2 > puntajeMax)
+            {
+                nombreJugadorPuntajeMax = nombreJugador2;
+                puntajeMax = acuJ2;
+            }
         }
         else
         {
@@ -419,7 +438,10 @@ void mostrarGanador(int& acuJ1, int& acuJ2, string& nombreJugador1, string& nomb
     SetConsoleTextAttribute(hConsole, 15);
 }
 
-void estadisticas() {
+
+//FUNCION MUESTRA JUGADOR CON PUNTAJE MAXIMO Y LO ALMACENA
+void estadisticas(string& nombreJugadorPuntajeMax, int& puntajeMax, int partidas)
+{
     cout << endl;
     cout << " #######  ##   ##  #####      ###    ##   ##   #####     ###    #####     #####  " << endl;
     cout << " ##       ### ###  ##   ##   ## ##   ##   ##  ##   ##   ## ##   ##  ##   ##   ## " << endl;
@@ -432,6 +454,15 @@ void estadisticas() {
     cout << "+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::+" << endl;
     cout << "\t\t\t\t MEJOR PUNTAJE \t\t\t" << endl;
     cout << "+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::+" << endl;
+    cout << endl;
 
-
+    if (partidas == 0)
+    {
+        cout << "JUEGUE AL MENOS UNA PARTIDA PARA ACTUALIZAR LAS ESTAD�STICAS ... " << endl;
+    }
+    else
+    {
+        cout << "\t\t\t JUGADOR: " << nombreJugadorPuntajeMax << " CON " << puntajeMax << " PUNTOS!" << endl;
+    }
+    cout << endl;
 }
